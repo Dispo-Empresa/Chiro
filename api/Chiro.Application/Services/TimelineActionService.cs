@@ -1,5 +1,4 @@
-﻿using Chiro.Application.Exceptions;
-using Chiro.Application.Interfaces;
+﻿using Chiro.Application.Interfaces;
 using Chiro.Domain.DTOs;
 using Chiro.Domain.Entities;
 using Chiro.Domain.Interfaces;
@@ -15,7 +14,7 @@ namespace Chiro.Application.Services
             _repository = actionRepository;
         }
 
-        public async Task<bool> ChangePeriod(ChangePeriodDTO changePeriodDTO)
+        public async Task<bool> ChangePeriodAsync(ChangePeriodDTO changePeriodDTO)
         {
             var timeline = new TimelineAction
             {
@@ -26,7 +25,7 @@ namespace Chiro.Application.Services
             return await _repository.ChangePeriodAsync(changePeriodDTO.Id, timeline);
         }
 
-        public async Task<bool> CreateTimelineAction(CreateTimelineActionDTO createTimelineActionDTO)
+        public async Task<bool> CreateTimelineActionAsync(CreateTimelineActionDTO createTimelineActionDTO)
         {
             var timeline = new TimelineAction
             {
@@ -39,7 +38,7 @@ namespace Chiro.Application.Services
             return await _repository.CreateTimelineActionAsync(timeline);
         }
 
-        public async Task<bool> ConcludeTimelineAction(ConcludeTimelineActionDTO concludeTimelineActionDTO)
+        public async Task<bool> ConcludeTimelineActionAsync(ConcludeTimelineActionDTO concludeTimelineActionDTO)
         {
             var timeline = new TimelineAction
             {
@@ -47,6 +46,16 @@ namespace Chiro.Application.Services
             };
 
             return await _repository.ConcludeTimelineActionAsync(concludeTimelineActionDTO.Id, timeline);
+        }
+
+        public async Task<bool> LinkTimelineActionsAsync(LinkTimelineActionsDTO linkTimelineActionsDTO)
+        {
+            var timeline = new TimelineAction
+            {
+                LinkedTimelineActionId = linkTimelineActionsDTO.TimelineActionToBeLinked
+            };
+
+            return await _repository.LinkTimelineActionsAsync(linkTimelineActionsDTO.Id, timeline);
         }
     }
 }

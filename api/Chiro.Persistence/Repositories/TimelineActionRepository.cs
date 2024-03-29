@@ -1,4 +1,5 @@
-﻿using Chiro.Domain.Entities;
+﻿using Chiro.Domain.DTOs;
+using Chiro.Domain.Entities;
 using Chiro.Domain.Interfaces;
 using Chiro.Infra;
 
@@ -41,6 +42,15 @@ namespace Chiro.Persistence.Repositories
         public List<TimelineAction> GetTimelineActionByProjectId(long projectId)
         {
             return _context.TimelineActions.Where(time => time.ProjectId == projectId).ToList();
+        }
+
+        public async Task<bool> LinkTimelineActionsAsync(long timelineActionId, TimelineAction timelineAction)
+        {
+            return await _context.TimelineActions.Where(w => w.Id == timelineActionId)
+                                                 .UpdateFromQueryAsync(x => new TimelineAction
+                                                 {
+                                                     LinkedTimelineAction = timelineAction.LinkedTimelineAction
+                                                 }) > 0;
         }
     }
 }

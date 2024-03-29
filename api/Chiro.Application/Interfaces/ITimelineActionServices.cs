@@ -4,10 +4,12 @@ namespace Chiro.Application.Interfaces
 {
     public interface ITimelineActionService
     {
-        Task<bool> CreateTimelineAction(CreateTimelineActionDTO createTimelineActionDTO);
+        Task<bool> CreateTimelineActionAsync(CreateTimelineActionDTO createTimelineActionDTO);
 
-        Task<bool> ChangePeriod(ChangePeriodDTO changePeriodDTO);
+        Task<bool> ChangePeriodAsync(ChangePeriodDTO changePeriodDTO);
 
-        Task<bool> ConcludeTimelineAction(ConcludeTimelineActionDTO concludeTimelineActionDTO);
+        Task<bool> ConcludeTimelineActionAsync(ConcludeTimelineActionDTO concludeTimelineActionDTO);
+
+        Task<bool> LinkTimelineActionsAsync(LinkTimelineActionsDTO linkTimelineActionsDTO);
     }
 }

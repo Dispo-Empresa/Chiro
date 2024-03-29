@@ -12,5 +12,8 @@
 
         public long ProjectId { get; set; }
         public Project Project { get; set; }
+
+        public long? LinkedTimelineActionId { get; set; }
+        public TimelineAction? LinkedTimelineAction { get; set; }
     }
 }

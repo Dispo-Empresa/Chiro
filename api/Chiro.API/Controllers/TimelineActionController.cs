@@ -25,7 +25,7 @@ namespace Chiro.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateAsync([FromBody] CreateTimelineActionDTO createTimelineActionDTO)
         {
-            var createdTimelineAction = await _timelineActionService.CreateTimelineAction(createTimelineActionDTO);
+            var createdTimelineAction = await _timelineActionService.CreateTimelineActionAsync(createTimelineActionDTO);
             if (!createdTimelineAction)
             {
                 return BadRequest("Timeline Action couldn't be created.");
@@ -42,7 +42,7 @@ namespace Chiro.API.Controllers
         [HttpPost("change-period")]
         public async Task<IActionResult> ChangePeriodAsync([FromBody] ChangePeriodDTO changePeriodDTO)
         {
-            var chengedPeriod = await _timelineActionService.ChangePeriod(changePeriodDTO);
+            var chengedPeriod = await _timelineActionService.ChangePeriodAsync(changePeriodDTO);
             if (!chengedPeriod)
             {
                 return BadRequest("Period couldn't be changed.");
@@ -59,7 +59,24 @@ namespace Chiro.API.Controllers
         [HttpPost("conclude")]
         public async Task<IActionResult> ConcludeAsync([FromBody] ConcludeTimelineActionDTO concludeTimelineActionDTO)
         {
-            var chengedPeriod = await _timelineActionService.ConcludeTimelineAction(concludeTimelineActionDTO);
+            var chengedPeriod = await _timelineActionService.ConcludeTimelineActionAsync(concludeTimelineActionDTO);
+            if (!chengedPeriod)
+            {
+                return BadRequest("Timeline Action couldn't be concluded.");
+            }
+
+            return Ok("Timeline Action Concluded.");
+        }
+
+        /// <summary>
+        /// Realiza o vínculo entre duas timeline actions.
+        /// </summary>
+        /// <param name="changePeriodDTO"></param>
+        /// <returns></returns>
+        [HttpPost("conclude")]
+        public async Task<IActionResult> LinkTimelineActionsAsync([FromBody] LinkTimelineActionsDTO linkTimelineActionsDto)
+        {
+            var chengedPeriod = await _timelineActionService.ConcludeTimelineActionAsync(concludeTimelineActionDTO);
             if (!chengedPeriod)
             {
                 return BadRequest("Timeline Action couldn't be concluded.");
