@@ -41,5 +41,10 @@ namespace Chiro.Application.Services
             var password = Hasher.Encrypt(authenticateProjectSessionDTO.Password, "2b!BDp9fUM2OcGYJ");
             return _repository.AuthenticateProjectSessionAsync(authenticateProjectSessionDTO.Id, password);
         }
+
+        public async Task<List<Project>> GetProjectsWithActionsAsync()
+        {
+            return await _repository.GetProjectsWithActionsAsync();
+        }
     }
 }

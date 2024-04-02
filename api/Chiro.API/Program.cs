@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(x =>
+    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,8 +23,6 @@ builder.Services.AddTransient<IProjectService, ProjectService>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 builder.Services.AddTransient<ITimelineActionService, TimelineActionService>();
 builder.Services.AddTransient<ITimelineActionRepository, TimelineActionRepository>();
-
-builder.Services.AddHostedService<ActionDelayService>();
 
 var app = builder.Build();
 
@@ -38,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+Task.Run(() => new ActionDelayService(app.Services.GetRequiredService<IProjectService>()).HandleActionDelay());
 
 app.Run();

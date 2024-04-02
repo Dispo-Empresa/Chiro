@@ -17,6 +17,13 @@ namespace Chiro.Persistence.Repositories
             return await _context.Projects.ToListAsync();
         }
 
+        public async Task<List<Domain.Entities.Project>> GetProjectsWithActionsAsync()
+        {
+            return await _context.Projects.Include(i => i.BoardActions)
+                                          .Include(i => i.TimelineActions).ThenInclude(i => i.LinkedTimelineAction)
+                                          .ToListAsync();
+        }
+
         public async Task<Domain.Entities.Project?> GetProjectAsync(long projectId)
         {
             return await _context.Projects.Include(i => i.BoardActions)

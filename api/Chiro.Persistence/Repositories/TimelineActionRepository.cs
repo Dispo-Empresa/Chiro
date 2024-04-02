@@ -49,7 +49,7 @@ namespace Chiro.Persistence.Repositories
             return await _context.TimelineActions.Where(w => w.Id == timelineActionId)
                                                  .UpdateFromQueryAsync(x => new TimelineAction
                                                  {
-                                                     LinkedTimelineAction = timelineAction.LinkedTimelineAction
+                                                     LinkedTimelineActionId = timelineAction.LinkedTimelineActionId
                                                  }) > 0;
         }
     }

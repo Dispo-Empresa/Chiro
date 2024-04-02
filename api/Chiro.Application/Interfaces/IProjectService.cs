@@ -12,5 +12,7 @@ namespace Chiro.Application.Interfaces
         Task<Project?> GetProjectAsync(long projectId);
 
         Task<bool> AuthenticateProjectSessionAsync(AuthenticateProjectSessionDTO authenticateProjectSessionDTO);
+
+        Task<List<Domain.Entities.Project>> GetProjectsWithActionsAsync();
     }
 }

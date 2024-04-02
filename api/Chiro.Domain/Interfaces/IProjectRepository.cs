@@ -9,5 +9,7 @@
         Task<bool> CreateProjectAsync(Entities.Project project);
 
         Task<bool> AuthenticateProjectSessionAsync(long projectId, string password);
+
+        Task<List<Domain.Entities.Project>> GetProjectsWithActionsAsync();
     }
 }

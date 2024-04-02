@@ -15,5 +15,19 @@
 
         public long? LinkedTimelineActionId { get; set; }
         public TimelineAction? LinkedTimelineAction { get; set; }
+
+        public List<long> DelaySelfAndChilds()
+        {
+            var alreadyAdjustedActions = new List<long>();
+            var currentTimelineAction = this;
+            while (currentTimelineAction != null)
+            {
+                alreadyAdjustedActions.Add(currentTimelineAction.Id);
+                currentTimelineAction.EndDate = DateTime.Now.AddDays(1);
+                currentTimelineAction = currentTimelineAction.LinkedTimelineAction;
+            }
+
+            return alreadyAdjustedActions;
+        }
     }
 }

@@ -73,10 +73,10 @@ namespace Chiro.API.Controllers
         /// </summary>
         /// <param name="changePeriodDTO"></param>
         /// <returns></returns>
-        [HttpPost("conclude")]
+        [HttpPost("link")]
         public async Task<IActionResult> LinkTimelineActionsAsync([FromBody] LinkTimelineActionsDTO linkTimelineActionsDto)
         {
-            var chengedPeriod = await _timelineActionService.ConcludeTimelineActionAsync(concludeTimelineActionDTO);
+            var chengedPeriod = await _timelineActionService.LinkTimelineActionsAsync(linkTimelineActionsDto);
             if (!chengedPeriod)
             {
                 return BadRequest("Timeline Action couldn't be concluded.");
